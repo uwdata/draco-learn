@@ -14,7 +14,7 @@ from draco.spec import Task
 
 def current_weights() -> Dict:
     ''' Get the current weights as a dictionary. '''
-    with open(os.path.join(os.path.dirname(__file__), '../../data/weights.json')) as f:
+    with open(os.path.join(os.path.dirname(__file__), './data/weights.json')) as f:
         return json.load(f)
 
 def compute_cost(violations: Dict) -> int:

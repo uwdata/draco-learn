@@ -4,10 +4,10 @@ import sys
 from pprint import pprint
 
 from draco.spec import *
-from draco.learn.helper import *
+from helper import *
 from draco.run import run
 
-from draco.learn import data_util
+import data_util
 
 import logging
 

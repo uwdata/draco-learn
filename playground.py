@@ -4,8 +4,9 @@ import os
 
 import numpy as np
 
-from draco.learn import data_util, linear
-from draco.learn.helper import current_weights
+import data_util
+import linear
+from helper import current_weights
 from draco.run import run
 from draco.spec import Task
 
@@ -113,8 +114,8 @@ if __name__ == '__main__':
     # output_file = absolute_path("../../data/spec_pairs/draco_cql.json")
     # play(dataset, train_weights=True, output_file=output_file)
 
-    spec_dir = absolute_path("../../data/compassql_examples")
+    spec_dir = absolute_path("./data/compassql_examples")
     dataset = data_util.load_partial_full_data(spec_dir)
-    output_file = absolute_path("../../data/spec_pairs/draco_cql_default_weights.json")
+    output_file = absolute_path("./data/spec_pairs/draco_cql_default_weights.json")
     play(dataset, train_weights=False, output_file=output_file)
     # open `http://localhost:3000/specviewer?data=spec_pairs/draco_cql_default_weights.json`

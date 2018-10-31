@@ -9,7 +9,7 @@ from sklearn import svm
 from sklearn.decomposition import PCA
 from sklearn.model_selection import train_test_split
 
-from draco.learn import data_util
+import data_util
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

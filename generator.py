@@ -3,7 +3,7 @@ import os
 import sys
 import random
 
-from draco.learn import data_util
+import data_util
 from draco.spec import *
 
 from draco import spec

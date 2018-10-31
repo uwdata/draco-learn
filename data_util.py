@@ -16,7 +16,7 @@ import pandas as pd
 from pandas.util import hash_pandas_object
 from sklearn.model_selection import train_test_split
 
-from draco.learn.helper import count_violations, current_weights
+from helper import count_violations, current_weights
 from draco.spec import Data, Encoding, Field, Query, Task
 
 logging.basicConfig(level=logging.INFO)

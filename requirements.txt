@@ -1,0 +1,12 @@
+agate
+pytest
+pytest-cov
+ansunit
+jsonschema
+pandas
+numpy
+scikit-learn
+seaborn
+RandomWords
+sortedcontainers
+draco
