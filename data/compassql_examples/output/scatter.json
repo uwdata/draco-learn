@@ -1,0 +1,26 @@
+{
+  "data": {
+    "url": "data/cars.json"
+  },
+  "mark": "point",
+  "encoding": {
+    "x": {
+      "field": "Acceleration",
+      "type": "quantitative",
+      "scale": {}
+    },
+    "y": {
+      "field": "Horsepower",
+      "type": "quantitative",
+      "scale": {}
+    }
+  },
+  "config": {
+    "overlay": {
+      "line": true
+    },
+    "scale": {
+      "useUnaggregatedDomain": true
+    }
+  }
+}

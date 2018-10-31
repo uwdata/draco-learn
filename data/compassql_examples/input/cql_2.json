@@ -1,0 +1,16 @@
+{
+  "data": {
+    "url": "data/cars.json"
+  },
+  "mark": "?",
+  "encodings": [
+    {
+      "channel": "?",
+      "field": "Horsepower"
+    },
+    {
+      "channel": "?",
+      "field": "Acceleration"
+    }
+  ]
+}
