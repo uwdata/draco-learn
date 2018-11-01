@@ -1,4 +1,4 @@
-from generation.helper import is_valid
+from generate.helper import is_valid
 from draco.spec import Task, Query, Data, Field
 
 def test_is_valid():
