@@ -14,7 +14,7 @@ from draco.spec import Task
 
 def current_weights() -> Dict:
     ''' Get the current weights as a dictionary. '''
-    with open(os.path.join(os.path.dirname(__file__), './data/weights.json')) as f:
+    with open(os.path.join(os.path.dirname(__file__), '../../data/weights.json')) as f:
         return json.load(f)
 
 def compute_cost(violations: Dict) -> int:
@@ -41,7 +41,7 @@ def count_violations(task: Task, debug=False) -> Optional[Dict[str, int]]:
         Returns:
             a dictionary storing violations of soft rules
     '''
-    out_task = run(task, files=['define.lp', 'soft.lp', 'output.lp'], silence_warnings=True, debug=debug)
+    out_task = run(task.to_asp_list(), files=['define.lp', 'soft.lp', 'output.lp'], silence_warnings=True, debug=debug)
     if out_task is not None:
         return out_task.violations
     else:

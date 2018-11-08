@@ -3,7 +3,7 @@ import os
 import pandas as pd
 import pytest
 
-from draco.learn.data_util import load_data, pos_neg_pickle_path, run_in_parallel
+from dracolearn.learn.data_util import load_data, pos_neg_pickle_path, run_in_parallel
 from draco.spec import Task
 
 
