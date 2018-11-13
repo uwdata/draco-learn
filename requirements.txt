@@ -1,5 +1,7 @@
-pytest
-pytest-cov
+agate
+clyngor
 draco
 scipy
 sklearn
+pandas
+pytest
