@@ -3,6 +3,7 @@ import json
 from typing import Dict, Optional
 from sortedcontainers import SortedDict
 
+
 class Spec(SortedDict):
     def __init__(self, *args, **kw):
         super(Spec, self).__init__(*args, **kw)
@@ -15,7 +16,7 @@ class Spec(SortedDict):
         Returns the encoding associated with the given channel,
         None if it does not exist.
         """
-        if (channel in self['encoding']):
-            return self['encoding'][channel]
+        if channel in self["encoding"]:
+            return self["encoding"][channel]
         else:
             return None

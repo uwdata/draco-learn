@@ -15,7 +15,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-def train_model(X: pd.DataFrame, test_size: float=0.3, C: float=1, quiet=False):
+def train_model(X: pd.DataFrame, test_size: float = 0.3, C: float = 1, quiet=False):
     """ Given features X and labels y, train a linear model to classify them
         Args:
             X: a N x M matrix, representing feature vectors
@@ -34,7 +34,7 @@ def train_model(X: pd.DataFrame, test_size: float=0.3, C: float=1, quiet=False):
 
     # flip a few examples at random
     idx = np.ones(size, dtype=bool)
-    idx[:int(size/2)] = False
+    idx[: int(size / 2)] = False
     np.random.shuffle(idx)
 
     X_train[idx] = -X_train[idx]
@@ -51,7 +51,7 @@ def train_model(X: pd.DataFrame, test_size: float=0.3, C: float=1, quiet=False):
     return clf
 
 
-def train_and_plot(data: pd.DataFrame, test_size: float=0.3):
+def train_and_plot(data: pd.DataFrame, test_size: float = 0.3):
     """ use SVM to classify them and then plot them after projecting X, y into 2D using PCA
     """
     X = data.negative - data.positive
@@ -65,32 +65,55 @@ def train_and_plot(data: pd.DataFrame, test_size: float=0.3):
     X0, X1 = X2[:, 0], X2[:, 1]
     xx, yy = make_meshgrid(X0, X1)
 
-    cm_bright = ListedColormap(['#FF0000', '#0000FF'])
+    cm_bright = ListedColormap(["#FF0000", "#0000FF"])
 
-    f, ax = plt.subplots(figsize=(8,6))
+    f, ax = plt.subplots(figsize=(8, 6))
 
     # predictions made by the model
     pred = clf.predict(X)
 
-    correct = (pred > 0)
+    correct = pred > 0
 
-    plt.scatter(X0[correct], X1[correct], c='g', cmap=cm_bright, alpha=0.5, marker='>', label='correct')
-    plt.scatter(X0[~correct], X1[~correct], c='r', cmap=cm_bright, alpha=0.5, marker='<', label='incorrect')
+    plt.scatter(
+        X0[correct],
+        X1[correct],
+        c="g",
+        cmap=cm_bright,
+        alpha=0.5,
+        marker=">",
+        label="correct",
+    )
+    plt.scatter(
+        X0[~correct],
+        X1[~correct],
+        c="r",
+        cmap=cm_bright,
+        alpha=0.5,
+        marker="<",
+        label="incorrect",
+    )
 
     ax.set_xlim(xx.min(), xx.max())
     ax.set_ylim(yy.min(), yy.max())
 
-    ax.set_xlabel('X0')
-    ax.set_ylabel('X1')
+    ax.set_xlabel("X0")
+    ax.set_ylabel("X1")
 
     ax.set_xticks(())
     ax.set_yticks(())
 
     plt.title("Predictions of Linear Model")
 
-    plt.annotate(f'Score: {clf.score(X, np.ones(len(X))):.{5}}. N: {int(len(data))}', (0,0), (0, -20), xycoords='axes fraction', textcoords='offset points', va='top')
+    plt.annotate(
+        f"Score: {clf.score(X, np.ones(len(X))):.{5}}. N: {int(len(data))}",
+        (0, 0),
+        (0, -20),
+        xycoords="axes fraction",
+        textcoords="offset points",
+        va="top",
+    )
 
-    plt.legend(loc='lower right')
+    plt.legend(loc="lower right")
     plt.axis("tight")
 
     plt.show()
@@ -98,7 +121,7 @@ def train_and_plot(data: pd.DataFrame, test_size: float=0.3):
     return clf
 
 
-def project_and_plot(data: pd.DataFrame, test_size: float=0.3):
+def project_and_plot(data: pd.DataFrame, test_size: float = 0.3):
     """ Reduce X, y into 2D using PCA and use SVM to classify them
         Then plot the decision boundary as well as raw data points
     """
@@ -113,34 +136,57 @@ def project_and_plot(data: pd.DataFrame, test_size: float=0.3):
     X0, X1 = X[:, 0], X[:, 1]
     xx, yy = make_meshgrid(X0, X1)
 
-    cm_bright = ListedColormap(['#FF0000', '#0000FF'])
+    cm_bright = ListedColormap(["#FF0000", "#0000FF"])
 
-    f, ax = plt.subplots(figsize=(8,6))
+    f, ax = plt.subplots(figsize=(8, 6))
 
     plot_contours(ax, clf, xx, yy)
 
     # predictions made by the model
     pred = clf.predict(X)
 
-    correct = (pred > 0)
+    correct = pred > 0
 
-    plt.scatter(X0[correct], X1[correct], c='g', cmap=cm_bright, alpha=0.5, marker='>', label='correct')
-    plt.scatter(X0[~correct], X1[~correct], c='r', cmap=cm_bright, alpha=0.5, marker='<', label='incorrect')
+    plt.scatter(
+        X0[correct],
+        X1[correct],
+        c="g",
+        cmap=cm_bright,
+        alpha=0.5,
+        marker=">",
+        label="correct",
+    )
+    plt.scatter(
+        X0[~correct],
+        X1[~correct],
+        c="r",
+        cmap=cm_bright,
+        alpha=0.5,
+        marker="<",
+        label="incorrect",
+    )
 
     ax.set_xlim(xx.min(), xx.max())
     ax.set_ylim(yy.min(), yy.max())
 
-    ax.set_xlabel('X0')
-    ax.set_ylabel('X1')
+    ax.set_xlabel("X0")
+    ax.set_ylabel("X1")
 
     ax.set_xticks(())
     ax.set_yticks(())
 
     plt.title("Predictions of Linear Model")
 
-    plt.annotate(f'Score: {clf.score(X, np.ones(len(X))):.{5}}. N: {int(len(data))}', (0,0), (0, -20), xycoords='axes fraction', textcoords='offset points', va='top')
+    plt.annotate(
+        f"Score: {clf.score(X, np.ones(len(X))):.{5}}. N: {int(len(data))}",
+        (0, 0),
+        (0, -20),
+        xycoords="axes fraction",
+        textcoords="offset points",
+        va="top",
+    )
 
-    plt.legend(loc='lower right')
+    plt.legend(loc="lower right")
     plt.axis("tight")
 
     plt.show()
@@ -163,7 +209,7 @@ def plot_contours(ax, clf, xx, yy, **params):
     return out
 
 
-def make_meshgrid(x, y, h=.01):
+def make_meshgrid(x, y, h=0.01):
     """Create a mesh of points to plot in
     Params:
         x: data to base x-axis meshgrid on
@@ -174,8 +220,7 @@ def make_meshgrid(x, y, h=.01):
     """
     x_min, x_max = x.min() - 1, x.max() + 1
     y_min, y_max = y.min() - 1, y.max() + 1
-    xx, yy = np.meshgrid(np.arange(x_min, x_max, h),
-                         np.arange(y_min, y_max, h))
+    xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
     return xx, yy
 
 
@@ -186,15 +231,18 @@ def main():
     clf = train_and_plot(train_dev, test_size=test_size)
     features = train_dev.negative.columns
 
-    path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../asp/weights_learned.lp'))
+    path = os.path.abspath(
+        os.path.join(os.path.dirname(__file__), "../../asp/weights_learned.lp")
+    )
 
-    with open(path, 'w') as f:
-        f.write('% Generated with `python draco/learn/linear.py`.\n\n')
+    with open(path, "w") as f:
+        f.write("% Generated with `python draco/learn/linear.py`.\n\n")
 
         for feature, weight in zip(features, clf.coef_[0]):
-            f.write(f'#const {feature}_weight = {int(weight * 1000)}.\n')
+            f.write(f"#const {feature}_weight = {int(weight * 1000)}.\n")
 
-    logger.info(f'Wrote model to {path}')
+    logger.info(f"Wrote model to {path}")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

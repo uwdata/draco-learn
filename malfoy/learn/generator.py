@@ -8,6 +8,7 @@ from draco.spec import *
 
 from draco import spec
 
+
 def sample_partial_specs(specs, N=None):
     """ Given a list of full specs, sample partial specs from them
     Args:
@@ -44,7 +45,7 @@ def sample_partial_specs(specs, N=None):
 
 
 def subst_w_prob(v1, v2, prob):
-    return np.random.choice([v1, v2], p=[prob, 1. - prob])
+    return np.random.choice([v1, v2], p=[prob, 1.0 - prob])
 
 
 def insert_holes(query, prob=0.8, subst_val=spec.HOLE):
@@ -57,7 +58,7 @@ def insert_holes(query, prob=0.8, subst_val=spec.HOLE):
     """
     mark = subst_w_prob(query.mark, subst_val, prob)
     encodings = []
-    
+
     for enc in query.encodings:
         channel = subst_w_prob(enc.channel, subst_val, prob)
         field = enc.field
@@ -67,20 +68,25 @@ def insert_holes(query, prob=0.8, subst_val=spec.HOLE):
         log_scale = subst_w_prob(enc.log_scale, subst_val, prob)
         zero = subst_w_prob(enc.zero, subst_val, prob)
         stack = subst_w_prob(enc.stack, subst_val, prob)
-        encodings.append(Encoding(channel, field, ty, aggregate, 
-                                  binning, log_scale, zero, stack, enc.id))
-    
+        encodings.append(
+            Encoding(
+                channel, field, ty, aggregate, binning, log_scale, zero, stack, enc.id
+            )
+        )
+
     return Query(mark, encodings)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     np.random.seed(1)
 
     # relative to this folder
-    synthetic_data_dir = os.path.join(os.path.dirname(__file__), "..", "..", 'data', "synthetic")
-    cql_out_dir = os.path.join(synthetic_data_dir, 'input')
-    vl_out_dir = os.path.join(synthetic_data_dir, 'output')
+    synthetic_data_dir = os.path.join(
+        os.path.dirname(__file__), "..", "..", "data", "synthetic"
+    )
+    cql_out_dir = os.path.join(synthetic_data_dir, "input")
+    vl_out_dir = os.path.join(synthetic_data_dir, "output")
 
     specs = data_util.load_neg_pos_specs()
 
