@@ -1,7 +1,8 @@
 agate
 clyngor
 draco
-scipy
-sklearn
 pandas
 pytest
+RandomWords
+scipy
+sklearn
