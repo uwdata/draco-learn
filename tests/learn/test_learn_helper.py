@@ -1,18 +1,14 @@
-import sys, os
+import os
+import sys
 
-sys.path.insert(0, os.path.abspath("../../"))
-
-from draco.spec import Data, Task, Query
-from malfoy.learn.helper import current_weights, count_violations
-
+from draco import vl2asp
+from malfoy.learn.helper import count_violations, current_weights
 
 def test_current_weights():
     assert "encoding_weight" in current_weights()
 
 
 def test_count_violations():
-    data_path = os.path.join(os.path.dirname(__file__), "../../data/cars.csv")
-    data = Data.from_csv(data_path)
     query_json = {
         "mark": "bar",
         "data": {"url": "data/cars.csv"},
@@ -21,7 +17,14 @@ def test_count_violations():
             "y": {"field": "horsepower", "type": "quantitative", "aggregate": "mean"},
         },
     }
-    violations = count_violations(Task(data, Query.from_vegalite(query_json)))
+
+    draco_query = vl2asp(query_json)  # add: os.path.dirname(os.path.abspath(__file__))
+
+    print(draco_query)
+
+    violations = count_violations(draco_query)
+
+    print(violations)
 
     assert "encoding" in violations.keys()
     assert violations.get("encoding") == 2

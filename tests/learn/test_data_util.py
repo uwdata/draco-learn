@@ -4,7 +4,6 @@ import pandas as pd
 import pytest
 
 from malfoy.learn.data_util import load_data, pos_neg_pickle_path, run_in_parallel
-from draco.spec import Task
 
 
 def test_load_data():

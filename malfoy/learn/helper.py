@@ -4,12 +4,11 @@ Helper functions for learning algorithm.
 
 import json
 import os
-from typing import Dict, Optional
+from typing import Dict, List, Optional
 
 import numpy as np
 
 from draco.run import run
-from draco.spec import Task
 
 
 def current_weights() -> Dict:
@@ -37,21 +36,21 @@ def compute_violation_costs(violations: Dict) -> Dict:
     return result
 
 
-def count_violations(task: Task, debug=False) -> Optional[Dict[str, int]]:
+def count_violations(draco_query: List[str], debug=False) -> Optional[Dict[str, int]]:
     """ Get a dictionary of violations for a full spec.
         Args:
             task: a task spec object
         Returns:
             a dictionary storing violations of soft rules
     """
-    out_task = run(
-        task.to_asp_list(),
+    result = run(
+        draco_query,
         files=["define.lp", "soft.lp", "output.lp"],
         silence_warnings=True,
         debug=debug,
     )
-    if out_task is not None:
-        return out_task.violations
+    if result is not None:
+        return result.violations
     else:
         return None
 
