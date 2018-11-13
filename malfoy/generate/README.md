@@ -12,7 +12,7 @@ You can run generation by using `run.py`. It accepts an interaction, number of g
 
 ### Dataset Viewer
 
-To view the generated data, start a the Draco Tools server (`yarn start` from `/draco-tools`) and navigate to the `Dataset Viewer`. You view the various interactions, divided into pages by the number of dimensions in the visualizations. Note, this tool is barebones, as it is used internally for development at the moment.
+To view the generated data, start a the Draco Tools server (`yarn start` from `/draco-tools`) and navigate to the `Dataset Viewer`. You view the various interactions, divided into pages by the number of dimensions in the visualizations. Note, this tool is barebone, as it is used internally for development at the moment.
 
 ### Labeler
 
@@ -30,7 +30,7 @@ The page displays two visualizations, their specs, and the data used. Use the mo
 
 ### Probabilistic Specification Generation
 
-We define a probabilistic model for generation of individual specifications, roughly modeled after the distribution of visualizations we expect in the real-world. This allows us to generate a wide breadth of visualization specifications via probabilistic sampling, approximating the true distribution without the requirement of matching the enourmous space. There are two key ideas in the definition of this model.
+We define a probabilistic model for generation of individual specifications, roughly modeled after the distribution of visualizations we expect in the real-world. This allows us to generate a wide breadth of visualization specifications via probabilistic sampling, approximating the true distribution without the requirement of matching the enormous space. There are two key ideas in the definition of this model.
 
 1. For each property of a Vega-Lite specification (i.e. each JSON key, nested or not), we define a probability for that property appearing in the specification. For example, `mark` may have a probability of 1, as it is a required property. Meanwhile, `stack` may have a probability of 0.1, as it is relatively uncommon in the real-world.
 2. For each value of a Vega-Lite specification (i.e. each JSON value, nested or not), we define a probability for that value appearing, conditioned on its property appearing. For example, a `center` value for `stack` may have a 0.1 probability, meaning that if `stack` is a property chosen by the model, we have a 0.1 chance of producing a `center` stacked visualization. The sum of the probabilities of each value conditioned on its parent property is constrained to 1 to preserve a valid distribution (though the code does not actually need this enforced to function properly).
