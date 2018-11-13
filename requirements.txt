@@ -1,2 +1,5 @@
-pytest
+agate
+clyngor
 draco
+pandas
+pytest
